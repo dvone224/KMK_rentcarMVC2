@@ -1,6 +1,7 @@
 package kr.rentcar.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import jakarta.servlet.ServletException;
@@ -15,20 +16,22 @@ public class LoginController implements Controller {
 	public String requestHandler(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		if(userId == null) {
-			return "login";
-		}
+		
 		String pwd = request.getParameter("pwd");
 		HashMap<String, String> parameter = new HashMap<String, String>();
 		parameter.put("userId", userId);
 		parameter.put("pwd", pwd);
-		int num = UserDAO.getInstance().checkLogin(parameter);
-		if(num == -1) {
-			System.out.println("로그인 실패");
-			return "login";
+		userId = UserDAO.getInstance().checkLogin(parameter);
+		
+		if(userId == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인 실패'); history.back();</script>");
+			writer.close();
+			return null;
 		}
 		HttpSession session = request.getSession();
-		session.setAttribute("log",num);
+		session.setAttribute("log",userId);
 		String ctx = request.getContextPath();
 		return "redirect:" + ctx +"/index.jsp";
 	}

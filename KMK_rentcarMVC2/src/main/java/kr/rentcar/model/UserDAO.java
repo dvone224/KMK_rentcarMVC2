@@ -18,25 +18,37 @@ public class UserDAO {
 		return instance;
 	}
 	
-	public int checkLogin(HashMap<String, String> map) {
-		int no = -1;
+	public String checkLogin(HashMap<String, String> map) {
+		String id = null;
 		try (SqlSession session = SqlSessionUtil.getSession().openSession()) {
-			no = session.selectOne("checkLogin", map);
+			id = session.selectOne("checkLogin", map);
 		} catch (Exception e) {
 			System.out.println("checkLogin() 에러");
 			e.printStackTrace();
 		}
-		return no;
+		return id;
 	}
 
 	public boolean isValidId(String userId) {
 		String currentId = null;
 		try (SqlSession session = SqlSessionUtil.getSession().openSession()) {
 			currentId = session.selectOne("isValidId", userId);
+			System.out.println("currentId = " + currentId);
 		} catch (Exception e) {
 			System.out.println("isValidId() 에러");
 			e.printStackTrace();
 		}
-		return currentId != null;
+		return currentId == null;
+	}
+	
+	public int insertUser(User user) {
+		int cnt = 0;
+		try (SqlSession session = SqlSessionUtil.getSession().openSession()) {
+			cnt = session.insert("insertUser", user);
+		} catch (Exception e) {
+			System.out.println("insertUser() 에러");
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 }

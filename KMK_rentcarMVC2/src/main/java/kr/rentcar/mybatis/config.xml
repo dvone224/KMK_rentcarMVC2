@@ -7,6 +7,8 @@
 <properties resource="kr/rentcar/mybatis/db.properties" />
 <typeAliases>
 	<typeAlias type="kr.rentcar.model.Rentcar" alias="rentcar"/>
+	<typeAlias type="kr.rentcar.model.User" alias="user"/>
+	<typeAlias type="kr.rentcar.model.Reservation" alias="reservation"/>
 </typeAliases>
 
   <environments default="development">
@@ -23,5 +25,6 @@
   <mappers>
     <mapper resource="kr/rentcar/mybatis/RentcarMapper.xml"/>
     <mapper resource="kr/rentcar/mybatis/UserMapper.xml"/>
+    <mapper resource="kr/rentcar/mybatis/ReservationMapper.xml"/>
   </mappers>
 </configuration>

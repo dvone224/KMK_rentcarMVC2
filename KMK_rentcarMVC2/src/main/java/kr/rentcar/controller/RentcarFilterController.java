@@ -36,7 +36,7 @@ public class RentcarFilterController implements Controller {
         response.setCharacterEncoding("UTF-8");
         String imgTag = "";
         for(Rentcar rentcar : list) {
-        	imgTag += String.format("<img class='rentcarImg' src='/RentcarImg/%s' data-value='%s'>"
+        	imgTag += String.format("<img class='rentcarImg' src='/RentcarImg/cars/%s' data-value='%s'>"
         			, rentcar.getImg() ,rentcar.getNum());
         }
         response.getWriter().print(imgTag);

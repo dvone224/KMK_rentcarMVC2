@@ -52,10 +52,10 @@ public class RentcarDAO {
 		return list;
 	}
 
-	public Rentcar getARentcarByNo(int no) {
+	public Rentcar getARentcarByNum(int num) {
 		Rentcar rentcar = null;
 		try (SqlSession session = SqlSessionUtil.getSession().openSession()) {
-			rentcar = session.selectOne("getARentcarByNo", no);
+			rentcar = session.selectOne("getARentcarByNo", num);
 		} catch (Exception e) {
 			System.out.println("getARentcarByNo() 에러");
 			e.printStackTrace();
@@ -63,6 +63,17 @@ public class RentcarDAO {
 		return rentcar;
 	}
 
+	public int updateTotalQty(Rentcar rentcar) {
+		int cnt = 0;
+		try (SqlSession session = SqlSessionUtil.getSession().openSession()) {
+			cnt = session.update("updateTotalQty", rentcar);
+			session.commit();
+		} catch (Exception e) {
+			System.out.println("updateTotalQty() 에러");
+			e.printStackTrace();
+		}
+		return cnt;
+	}
 
 
 }

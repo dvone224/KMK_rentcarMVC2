@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.rentcar.ReservationMapper">
+
+	<insert id="insertReservation" parameterType="reservation">
+		insert into
+		reservation (num, userid, qty, dday, rday, usein, usewifi, usenavi,
+		useseat)
+		values
+		(#{num},#{userId},#{qty},#{dDay},#{rDay},#{useIn},#{useWifi},#{useNavi},#{useSeat})
+	</insert>
+
+<!-- 	<resultMap id="reservationInfoMap" type="HashMap">
+		<result column="img" property="img" javaType="String" />
+		<result column="name" property="name" javaType="String" />
+		<result column="rday" property="rday" javaType="String" />
+		<result column="dday" property="dday" javaType="String" />
+		<result column="price" property="price" javaType="Integer" />
+		<result column="qty" property="qty" javaType="Integer" />
+		<result column="usein" property="usein" javaType="Integer" />
+		<result column="usewifi" property="usewifi" javaType="Integer" />
+		<result column="usenavi" property="usenavi" javaType="Integer" />
+		<result column="useseat" property="useseat" javaType="Integer" />
+	</resultMap> -->
+
+	<select id="getReserveList" parameterType="String" resultType="HashMap">
+		select rent.img, rent.name, res.rday, res.dday, rent.price, res.qty, res.usein, res.usewifi, res.usenavi, res.useseat
+		from rentcar rent
+		inner join reservation res
+		on rent.num = res.num
+		where res.userid = #{userid}
+	</select>
+</mapper>

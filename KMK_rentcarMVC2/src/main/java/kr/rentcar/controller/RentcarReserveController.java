@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.rentcar.model.RentcarDAO;
 
-public class RentcarReserveController implements Controller{
+public class RentcarReserveController implements Controller {
 
 	@Override
 	public String requestHandler(HttpServletRequest request, HttpServletResponse response)
@@ -19,6 +19,19 @@ public class RentcarReserveController implements Controller{
 		ArrayList<String> categories = dao.getGroupByRentcarList("category");
 		companies.sort(Comparator.naturalOrder());
 		categories.sort(Comparator.naturalOrder());
+		for (int i = 0; i < categories.size(); i++) {
+			switch (categories.get(i)) {
+			case "1":
+				categories.set(i, "소형");
+				break;
+			case "2":
+				categories.set(i, "중형");
+				break;
+			case "3":
+				categories.set(i, "대형");
+				break;
+			}
+		}
 		request.setAttribute("companies", companies);
 		request.setAttribute("categories", categories);
 		return "carReserve";

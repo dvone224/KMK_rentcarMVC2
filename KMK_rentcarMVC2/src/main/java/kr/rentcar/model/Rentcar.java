@@ -6,7 +6,7 @@ public class Rentcar {
 	private int category;
 	private int price;
 	private int usepeople;
-	private int totalQty;
+	private int total_qty;
 	private String company;
 	private String img;
 	private String info;
@@ -31,8 +31,12 @@ public class Rentcar {
 		return usepeople;
 	}
 
-	public int getTotalQty() {
-		return totalQty;
+	public int gettotal_qty() {
+		return total_qty;
+	}
+	
+	public void settotal_qty(int total_qty) {
+		this.total_qty = total_qty;
 	}
 
 	public String getCompany() {
@@ -46,5 +50,14 @@ public class Rentcar {
 	public String getInfo() {
 		return info;
 	}
+
+	@Override
+	public String toString() {
+		return "Rentcar [num=" + num + ", name=" + name + ", category=" + category + ", price=" + price + ", usepeople="
+				+ usepeople + ", total_qty=" + total_qty + ", company=" + company + ", img=" + img + ", info=" + info
+				+ "]";
+	}
+	
+	
 
 }

@@ -5,12 +5,17 @@
 
 <mapper namespace="kr.rentcar.mybatis.UserMapper">
 
-	<select id="checkLogin" parameterType="HashMap" resultType="int">
-		select num from user where userid=#{userId} and pwd=#{pwd}
+	<select id="checkLogin" parameterType="HashMap" resultType="String">
+		select userid from user where userid=#{userId} and pwd=#{pwd}
 	</select>
 	
 	<select id="isValidId" parameterType="String" resultType="String">
-		select userid from user where userid=${userId}
+		select userid from user where userid=#{userId}
 	</select>
+	
+	<insert id="insertUser" parameterType="user">
+		insert into user (name, userid, pwd, email, phone) 
+		values (#{name},#{userId} , #{pwd}, #{email}, #{phone});
+	</insert>
 	
 </mapper>
